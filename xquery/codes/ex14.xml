@@ -1,0 +1,5 @@
+<xupdate:append select="/addresses" child="last()"> 
+	<xupdate:element name="address"> 
+		<town>San Francisco</town> 
+	</xupdate:element> 
+</xupdate:append>  

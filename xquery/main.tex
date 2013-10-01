@@ -88,17 +88,41 @@
 	\end{columns}
 \end{frame}
 
+\begin{frame}{XPath}
+	A query language for selecting nodes from an XML document
+	\begin{block}{Example XMLs}
+		\inputminted[fontsize=\tiny]{xml}{codes/ex24.xml}
+	\end{block}
+	\begin{block}{Query examples}
+		\inputminted[fontsize=\tiny]{xquery}{codes/ex25.xml}
+	\end{block}
+\end{frame}
+
 \begin{frame}{XQuery and XPath}
 	XQuery 1.0 and XPath 2.0 share the same data model and support the same functions and operators
 
 	% Может быть тут написать про XSLT
 \end{frame}
 
+% XSLT functionalities overlap with those of XQuery, which was initially conceived as a query language for large collections of XML documents
+
+ % XSLT was primarily conceived as a stylesheet language whose primary goal was to render XML for the human reader on screen, on the web (as web template language), or on paper
+
+% XQuery was primarily conceived as a database query language in the tradition of SQL
+
+\begin{frame}{XSLT}
+	\begin{itemize}
+		\item eXtensible Stylesheet Language Transformations
+		\item Turing-complete language
+		\item Conceived as a stylesheet language whose goal was to render XML for the human reader
+	\end{itemize}
+\end{frame}
+
 % \begin{frame}{Example}
 % 	\inputminted{xquery}{codes/ex1.xq}
 % \end{frame}
 
-\begin{frame}{Examples of Use}
+\begin{frame}{XQuery. Usages}
 	\begin{itemize}
 		\item Extract information to use in a Web Service
 		\item Generate summary reports
@@ -135,7 +159,7 @@
 
 \begin{frame}{FLWOR + HTML}
 	\begin{block}{Script}
-		\inputminted[fontsize=\footnotesize]{html}{codes/ex6.html}
+		\inputminted[fontsize=\footnotesize]{xquery}{codes/ex6.html}
 	\end{block}
 
 	\begin{block}{Result}
@@ -198,11 +222,147 @@
 
 \section{XUpdate}
 
+% \begin{frame}{What is XUpdate?}
+% 	\begin{itemize}
+% 		\item A lightweight XML query language for modifying XML data
+% 		\item For users not content to wait for the XQuery Update Facility extension of the W3C standard
+% 		\item Last Working Draft, September 14, 2000
+% 	\end{itemize}
+% \end{frame}
+
 \begin{frame}{What is XUpdate?}
 	\begin{itemize}
-		\item A lightweight XML query language for modifying XML data
-		\item For users not content to wait for the XQuery Update Facility extension of the W3C standard
-		\item Last Working Draft, September 14, 2000
+		\item Makes extensive use of the expression language defined by XPath for selecting elements for updating and for conditional processing
+		\item A pure descriptive language which is designed with references to the definition of XSL Transformations
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Modifications}
+	\begin{block}{xupdate:modifications}
+	\begin{itemize}
+		\item xupdate:insert-before
+		\item xupdate:insert-after
+		\item xupdate:append
+		\item xupdate:update
+		\item xupdate:remove
+		\item xupdate:rename
+		\item xupdate:variable
+		\item xupdate:value-of
+		\item xupdate:if
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Insertion}
+	\begin{block}{Commands}
+	\begin{itemize}
+		\item xupdate:insert-before
+		\item xupdate:insert-after
+	\end{itemize}
+	\end{block}
+
+	\begin{block}{Element types}
+	\begin{itemize}
+		\item xupdate:element
+		\item xupdate:attribute
+		\item xupdate:text
+		\item xupdate:processing-instruction
+		\item xupdate:comment
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Insertion. Element}
+	\begin{block}{Code}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex10.xml}
+	\end{block}
+	\begin{block}{Result}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex11.xml}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Insertion. Attribute}
+	\begin{block}{Code}
+		\inputminted[fontsize=\tiny]{xml}{codes/ex12.xml}
+	\end{block}
+	\begin{block}{Result}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex13.xml}
+	\end{block}
+\end{frame}
+
+% TODO: Read about processing-instructions
+
+\begin{frame}{Append}
+	\begin{block}{Element types}
+	\begin{itemize}
+		\item xupdate:element
+		\item xupdate:attribute
+		\item xupdate:text
+		\item xupdate:processing-instruction
+		\item xupdate:comment
+	\end{itemize}
+	\end{block}
+
+	\begin{block}{Position}
+		The optional child attribute specifies the position of the newly appended child node
+	\end{block}
+\end{frame}
+
+\begin{frame}{Append. Example}
+	\begin{block}{Code}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex14.xml}
+	\end{block}
+	\begin{block}{Result}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex15.xml}
+	\end{block}	
+\end{frame}
+
+\begin{frame}{Update}
+	\begin{block}{Code}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex16.xml}
+	\end{block}
+	\begin{block}{Result}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex17.xml}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Remove}
+	\begin{block}{Code}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex18.xml}
+	\end{block}
+	\begin{block}{Result}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex19.xml}
+	\end{block}		
+\end{frame}
+
+\begin{frame}{Rename}
+	\begin{block}{Code}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex20.xml}
+	\end{block}
+	\begin{block}{Result}
+		\inputminted[fontsize=\footnotesize]{xml}{codes/ex21.xml}
+	\end{block}		
+\end{frame}
+
+\begin{frame}{Variables}
+	\begin{block}{With variable}
+		\inputminted[fontsize=\tiny]{xml}{codes/ex22.xml}
+	\end{block}
+	\begin{block}{With variable}
+		\inputminted[fontsize=\tiny]{xml}{codes/ex23.xml}
+	\end{block}		
+\end{frame}
+
+\begin{frame}{Realizations}
+	\begin{itemize}
+		\item Xmldiff
+		% Xmldiff is a Python tool that figures out the differences between two similar XML files, in the same way the diff utility does it for text files. Xmldiff can produce an XUpdate output
+		\item 4Suite
+		% 4Suite is a collection of Python tools for XML processing and object database management that also implements an XUpdate command line interface
+		\item Lexus
+		% Lexus is a Java based XUpdate implementation. Lexus is used in several Open Source projects: Ozone, Xindice
+		\item Jaxup
+		% Jaxup is an XML update engine written in Java to work against a variety of XML based object models such as DOM, dom4j and JDOM. It supports the XUpdate standard draft and will support other xml update standards as they become available
 	\end{itemize}
 \end{frame}
 

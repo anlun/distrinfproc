@@ -1,0 +1,5 @@
+<xupdate:append select="/addresses"> 
+	<xupdate:element name="address"> 
+		<xupdate:value-of select="/addresses/address[0]/town"/> 
+	</xupdate:element> 
+</xupdate:append>

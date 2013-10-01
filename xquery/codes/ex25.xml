@@ -1,0 +1,10 @@
+/A/B/C
+/child::A/child::B/child::C
+
+
+A//C/*[1]
+child::A/descendant-or-self::node()/child::C/child::*[position()=1]
+
+/A/B/@name
+
+//C | //D
