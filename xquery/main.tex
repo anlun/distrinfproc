@@ -176,6 +176,49 @@
 	\end{block}
 \end{frame}
 
+% XML may be strongly typed and governed by a W3C XML Schema, and a strongly typed query language with static typing can prevent many errors for this kind of data.
+
+% XML may be governed by another schema language, such as DTDs or RELAX-NG.
+
+% XML may have an ad hoc structure and no schema, and the whole reason for performing a query may be to discover the structure found in a document. For this kind of data, the query language should be able to process whatever data exists, with no preconceived notions of what should be there.
+
+% XML may be used as a view of another system, such as a relational database. These systems are typically strongly typed, but do not use W3C XML Schema as the basis for their type system. Fortunately, standard mappings are emerging for some systems, such as SQL's mappings from relational schemas to W3C XML Schema. These are defined in the SQL/XML proposal, which provides standard XML extensions to SQL [SQLXML].
+
+% XML data sources may have very complex structure, and expressions in XQuery must be well defined in terms of all the structures to which the operands can evaluate.
+
+\subsection{Data Types}
+
+\begin{frame}{Data Types}
+	\begin{itemize}
+		\item XML may be strongly typed and governed by a W3C XML Schema
+		\item XML may be governed by another schema language
+		\item XML may have an ad hoc structure and no schema
+		\item XML may be used as a view of another system, such as a relational database
+		\item XML data sources may have very complex structure
+	\end{itemize}
+
+	\begin{block}{}
+		XQuery allows queries that rely on very little type information or take advantage of type information to detect potential errors before a query is ever executed
+	\end{block}
+
+\end{frame}
+
+% The type system of XQuery is based on [SCHEMA]. There are two sets of types in XQuery: the built-in types that are available in any query, and types imported into a query from a specific schema. 
+
+\begin{frame}{Example}
+	\begin{block}{Without types}
+		\inputminted[fontsize=\tiny]{xquery}{codes/ex26.xq}
+	\end{block}
+	\pause
+	\begin{block}{Declaration with types}
+		\inputminted[fontsize=\tiny]{xquery}{codes/ex27.xq}
+	\end{block}
+	\pause
+	\begin{block}{Type error}
+		\inputminted[fontsize=\tiny]{xquery}{codes/ex28.xq}
+	\end{block}
+\end{frame}
+
 \begin{frame}{Data Types}
 	Shares the same data types as XML Schema 1.0 (XSD)
 
@@ -202,6 +245,8 @@
 			\end{itemize}
 	\end{itemize}
 \end{frame}
+
+\subsection{JSON}
 
 \begin{frame}{JSON}
 	\begin{itemize}
@@ -234,6 +279,7 @@
 	\begin{itemize}
 		\item Makes extensive use of the expression language defined by XPath for selecting elements for updating and for conditional processing
 		\item A pure descriptive language which is designed with references to the definition of XSL Transformations
+		\item Has found a niche market of users not content to wait for the XQuery Update Facility
 	\end{itemize}
 \end{frame}
 

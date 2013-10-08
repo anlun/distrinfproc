@@ -1,0 +1,5 @@
+zorba -e input-context=books.xml -f -q test.xq
+
+zorba -e input-context=books.xml -f -q test1.xq
+
+xmldiff w.xml wChanged.xml
