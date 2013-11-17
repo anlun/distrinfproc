@@ -1,11 +1,11 @@
-\$ne                     // !=
-\$gt, \$gte, \$lt, \$lte // >, >=, <, <=
-{ \$mod: [2, 1] }
-{ \$in : ["NoSQL", "Document Databases"] }
-{ \$nin: ["NoSQL", "Document Databases"] }
-{ \$all: ["NoSQL", "Document Databases"] }
-{ \$size: 2 } // for array
-{ \$exists: false }
+$ne                     // !=
+$gt, $gte, $lt, $lte // >, >=, <, <=
+{ $mod: [2, 1] }
+{ $in : ["NoSQL", "Document Databases"] }
+{ $nin: ["NoSQL", "Document Databases"] }
+{ $all: ["NoSQL", "Document Databases"] }
+{ $size: 2 } // for array
+{ $exists: false }
 
 // OR
 {$or: [{ $reviewed: {$exists: true}, {$categories: {$size: 2}} }]}

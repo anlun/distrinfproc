@@ -3,4 +3,4 @@ db.collection.find({<selection>},
 	<limit>, <skip>
 )
 
-db.collection(...).count()
+db.collection.find(...).count()
