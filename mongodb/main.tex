@@ -1,0 +1,271 @@
+\documentclass[sans]{beamer}
+
+% \usetheme{Boadilla}
+\mode<presentation>
+{
+	% \usetheme{CambridgeUS}
+	\usetheme{Singapore}
+	% \usetheme{Bergen}
+	% \usecolortheme{whale}
+	% \usefonttheme{serif}
+	% \usefonttheme{professionalfonts}
+	% \usefonttheme{structureitalicserif}
+}
+
+\usepackage{cmap}
+\usepackage{listings}
+\usepackage{lmodern}
+\usepackage{color}
+\usepackage{minted}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{wrapfig}
+
+% \usepackage[labelformat=empty]{subcaption}
+\usepackage[labelformat=empty]{caption}
+
+% \usefonttheme{professionalfonts} % using non standard fonts for beamer
+% \usefonttheme{sansserif} % default family is serif
+% \usepackage{fontspec}
+% \usepackage[T2A]{fontenc}
+% \setmainfont{Comic Sans MS}
+
+% \usepackage[utf8]{inputenc}
+% \usepackage[russian]{babel}
+
+\usepackage{fontspec}
+% \setmainfont[Mapping=tex-text]{CMU Serif}
+
+
+
+\usepackage{polyglossia}
+\setdefaultlanguage{russian}
+
+% \newfontfamily\cyrillicfont[Script=Cyrillic]{Comic Sans MS}
+% \newfontfamily{\cyrillicfontt} {Comic Sans MS}
+% \newfontfamily{\cyrillicfonttt}{Comic Sans MS}
+
+\setmainfont[Ligatures=TeX]{DejaVu Serif}
+\setsansfont[Ligatures=TeX]{DejaVu Sans}
+% \setmainfont[Ligatures=TeX]{Comic Sans MS}
+% \setsansfont[Ligatures=TeX]{Comic Sans MS}
+\setmonofont{DejaVu Sans Mono}
+
+% \setmathfont{XITS Math}
+% \defaultfontfeatures{Scale=MatchLowercase,Mapping=tex-text}
+
+\begin{document}
+
+\title[MongoDB]{MongoDB
+
+\tiny
+Christof Strauch "NoSQL Databases"
+}
+
+\institute{SE, SPbSU}
+
+\author
+[Podkopaev Anton]{Podkopaev Anton, \texttt podkoav239@gmail.com}
+\date [28-10-13]{28 October 2013}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\begin{frame}{MongoDB}
+	\begin{itemize}
+		\item Schema-free document database
+		\item Written in C++
+		\item Open-source, 10gen Inc.
+		\item Adjective {\it humongous} % Огромный
+		\item {\color{blue} Goal:}
+
+		Gap between key-/value-stores and RDBMSs
+		\item {\color{blue} Users:}
+
+		SourceForge.net, foursquare, the New York Times, bit.ly, DIASPORA, Yandex, etc.
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{DB structure}
+	\begin{itemize}
+		\item DBs reside on MongoDB server
+		\item Server hosts many of such DBs
+		\item DBs contain collections
+		\item Collections consist of documents
+	\end{itemize}
+\end{frame}
+
+\section{Collections}
+
+\begin{frame}{Collection}
+	\begin{itemize}
+		\item {\color{blue} Def:} named groupings of documents
+		\item A collection may be heterogeneous
+		\item Manual suggests:
+
+		{\it
+			One database collection for each of your top level objects
+		}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Creation}
+	\begin{itemize}
+		\item Created automatically at the first document is inserted into a DB
+		\item Parameters
+		\begin{itemize}
+			\item auto-indexing
+			\item preallocated disk space
+			\item size limits
+			\item ...			
+		\end{itemize}
+
+		\item Explicit creation
+		\inputminted[fontsize=\footnotesize]{js}{codes/creation.js}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Namespaces}
+	\begin{itemize}
+		\item Hierarchical namespaces using a dot-notation
+		\inputminted[fontsize=\footnotesize]{js}{codes/hier.js}
+		\item The collection namespace is flat from the DB's perspective
+	\end{itemize}
+\end{frame}
+
+\section{Documents}
+
+\begin{frame}{Document}
+	\begin{itemize}
+		\item The abstraction and unit of data storable in MongoDB
+		\item Comparable to
+		\begin{itemize}
+			\item XML doc
+			\item JSON doc
+			\item Python dic
+			\item Ruby hash
+		\end{itemize}
+		\item In fact, the format is called BSON
+		% Reasons of performance
+		\item 4Mb --- limit of document size
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+	\inputminted{js}{codes/docEx.js}
+\end{frame}
+
+\begin{frame}{Datatypes}
+	\begin{itemize}
+		\item boolean, integer, double
+		\item string (UTF-8), regular expressions, code (JS)
+		\item object (BSON)
+		\item object id (12 bytes)
+			\begin{itemize}
+				\item timestamp (4 bytes)
+				\item Machine id (3 bytes)
+				\item MongoDB process id (2 bytes)
+				\item counter (3 bytes)
+			\end{itemize}
+		\item null
+		\item array
+		\item date
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{References}
+	\begin{itemize}
+		\item Doesn't provide a foreign key mechanism
+		\item Manual assignment of ref field the value of the {\it \_id}
+		\item DBRef
+		\begin{itemize}
+			\item Can be dereferenced automatically
+			\item \inputminted[fontsize=\footnotesize]{js}{codes/dbref.js}
+		\end{itemize}
+
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{References vs Embeddings}
+	\begin{itemize}
+		\item Criteria for Object References
+		\begin{itemize}
+			\item First-class domain objects
+			\item Many-to-many
+			\item Queried in large numbers
+			\item Large objects
+		\end{itemize}
+
+		\item Criteria for Object Embeddings
+		\begin{itemize}
+			\item "Line-item detail" characteristic
+			\item Aggregation relationship
+			\item Not referenced by another object
+			\item Request performance
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\section{Database Operations}
+
+\begin{frame}{Selection}
+	\begin{itemize}
+		\item Equivalent to the WHERE clause in SQL
+		\item In case of empty object, all documents of a collection are returned
+	\end{itemize}
+	
+	\begin{block}{Example}
+		\inputminted[fontsize=\footnotesize]{js}{codes/selection.js}
+	\end{block}
+	
+	\begin{block}{General form}
+		\inputminted[fontsize=\footnotesize]{js}{codes/selectionGen.js}
+	\end{block}
+\end{frame}
+
+\begin{frame}{Selection.Operators}
+	\inputminted[fontsize=\footnotesize]{js}{codes/selectionOp.js}		
+\end{frame}
+%Prefer to use JS rather than SQL strings because of optimizer
+
+\begin{frame}{Projection}
+	\inputminted[fontsize=\footnotesize]{js}{codes/projection.js}
+\end{frame}
+
+\begin{frame}{Result processing}
+	\begin{itemize}
+		\item sort
+		\item limit
+		\item skip
+		\item count
+	\end{itemize}
+	\inputminted{js}{codes/proccesing.js}
+\end{frame}
+
+\begin{frame}{Cursors}
+	\inputminted{js}{codes/cursor.js}
+\end{frame}
+
+\begin{frame}{Query optimizer}
+	\begin{itemize}
+		\item Supports ad-hoc queries
+		\vspace{1cm}
+		% \pause
+		\item Not based on statistics
+		\item Not model the costs of multiple possible query plans
+		\vspace{1cm}
+		% \pause
+		\item Execute different query plans in parallel
+		\item Stops all of them as soon as the first has finished
+		% thereby learning which query plan worked the best for a certain query
+		\vspace{1cm}
+		% \pause
+		\item The system is non-relational
+		\item There are no joins
+		\item The space of possible query plans much smaller
+	\end{itemize}
+\end{frame}
+
+\end{document}

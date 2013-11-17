@@ -1,8 +1,12 @@
 #!/bin/bash
 dd if=/dev/zero of=disk-image count=40960
-mkfs.xfs disk-image
-mkdir glusterfs_folder
-mount disk-image gluster_disk
+
+# sudo apt-get install xfs
+# sudo apt-get install xfsprogs
+
+mkfs.ext3 disk-image
+mkdir gluster_disk
+sudo mount disk-image gluster_disk -t ext3
 
 # Установить сервер GlusterFS
 sudo apt-get install glusterfs-server

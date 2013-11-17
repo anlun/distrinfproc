@@ -1,0 +1,1 @@
+{ $ref: <collectionName>, $id: <documentId> }
